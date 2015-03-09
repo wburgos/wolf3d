@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:54:01 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/09 23:45:26 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 00:04:05 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 
 # define BUFF_SIZE	128
 
-typedef struct 	s_mapval
+typedef struct		s_mapval
 {
 	int		val;
 	int		is_last;
-}				t_mapval;
+}					t_mapval;
 
 typedef struct		s_env
 {
@@ -48,24 +48,24 @@ typedef struct		s_env
 
 typedef struct		s_point
 {
-	int				x;
-	int				y;
-	int				z;
+	int		x;
+	int		y;
 }					t_point;
 
 typedef struct		s_line
 {
-	int				delta_x;
-	int				delta_y;
-	float			error;
-	float			delta_error;
+	int		delta_x;
+	int		delta_y;
+	float	error;
+	float	delta_error;
 }					t_line;
 
-int			get_next_line(int const fd, char **line);
-int			die(char *err, int perr);
-t_mapval	**read_map(char *file);
-t_mapval	*ft_nbrsplit(char *str);
-void		ft_putpix(t_env *e, int x, int y, int color);
-void		ft_drawline(t_point p1, t_point p2, t_env *e);
+int					get_next_line(int const fd, char **line);
+int					die(char *err, int perr);
+t_mapval			**read_map(char *file);
+t_mapval			*ft_nbrsplit(char *str);
+void				ft_putpix(t_env *e, int x, int y, int color);
+void				ft_drawline(t_point p1, t_point p2, t_env *e);
+void				print_map(t_mapval **map); // Print de test, a virer
 
 #endif

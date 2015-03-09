@@ -6,18 +6,18 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:29:50 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/09 23:39:51 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 00:04:49 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+// #include <stdio.h>
 #include <stdlib.h>
 #include "wolf.h"
 
 static int	mlx_key(int keycode, t_env *e)
 {
 	(void)e;
-	printf("Key pressed: %d\n", keycode);
+	// printf("Key pressed: %d\n", keycode);
 	if (keycode == ESC_CODE)
 		exit(0);
 	return (0);
@@ -32,24 +32,6 @@ static int	mlx_expose(t_env *e)
 	return (0);
 }
 
-void		print_map(t_mapval **map)
-{
-	int		i = 0;
-	int		j;
-
-	while (map[i])
-	{
-		j = 0;
-		while (!(map[i][j].is_last))
-		{
-			printf("%d ", map[i][j].val);
-			j++;
-		}
-		printf("%d\n", map[i][j].val);
-		i++;
-	}
-}
-
 int			main(int ac, char **av)
 {
 	t_env		e;
@@ -57,6 +39,7 @@ int			main(int ac, char **av)
 	if (ac == 2)
 	{
 		e.map = read_map(av[1]);
+		// On a la map \o/
 		if (!(e.mlx = mlx_init()))
 			die("Error initializing mlx\n", 0);
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
