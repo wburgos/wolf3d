@@ -1,2 +1,3 @@
-libft/*.a
 wolf3d
+*.a
+*.o
