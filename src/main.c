@@ -6,17 +6,17 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:29:50 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/09 19:07:33 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/09 19:25:14 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+// #include <stdio.h>
 #include <stdlib.h>
 #include "wolf.h"
 
 int		mlx_escape(int keycode, t_env *e)
 {
-	printf("Key pressed: %d\n", keycode);
+	// printf("Key pressed: %d\n", keycode);
 	if (keycode == ESC_CODE)
 		exit(0);
 	return (0);

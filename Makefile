@@ -11,15 +11,18 @@
 #******************************************************************************#
 
 NAME = wolf3d
-SRCS = main.c image.c
-OBJ = $(SRCS:.c=.o)
+SDIR = src/
+INC = includes/
+FILES = main.c image.c
+OBJ = $(FILES:.c=.o)
+SRC = $(addprefix $(SDIR), $(FILES))
 
 all: $(NAME)
 
 $(NAME):
 	@make re -C libft/
 	@echo "Compiling wolf ..."
-	@gcc -c $(SRCS) -I. -Ilibft/includes
+	@gcc -c $(SRC) -I$(INC) -Ilibft/includes
 	@gcc -o $(NAME) $(OBJ) -Llibft -lft -lmlx -framework OpenGL -framework AppKit
 	@echo "$(NAME) generated"
 
