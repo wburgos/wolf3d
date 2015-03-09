@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:54:01 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 00:04:05 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 00:11:51 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 # define WIN_WIDTH 	1280
 # define WIN_HEIGHT 800
 
-# define ESC_CODE	65307
-# define LEFT		65361
-# define UP			65362
-# define RIGHT		65363
-# define DOWN		65364
+# define ESC_CODE		65307
+# define LEFT			65361
+# define UP				65362
+# define RIGHT			65363
+# define DOWN			65364
+
+# define KEYPRESS_MASK	(1L<<0)
+# define KEYPRESS		2
 
 # define BUFF_SIZE	128
 
