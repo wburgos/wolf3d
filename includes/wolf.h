@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:54:01 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/09 19:23:12 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/09 21:38:24 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@
 # define WIN_HEIGHT 800
 # define WIN_NAME 	"Wolf7d"
 # define ESC_CODE	53
+
+int		die(char *err);
 
 #endif
