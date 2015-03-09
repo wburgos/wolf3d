@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:29:50 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/09 21:37:29 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/09 23:39:51 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 static int	mlx_key(int keycode, t_env *e)
 {
+	(void)e;
 	printf("Key pressed: %d\n", keycode);
 	if (keycode == ESC_CODE)
 		exit(0);
@@ -31,17 +32,41 @@ static int	mlx_expose(t_env *e)
 	return (0);
 }
 
+void		print_map(t_mapval **map)
+{
+	int		i = 0;
+	int		j;
+
+	while (map[i])
+	{
+		j = 0;
+		while (!(map[i][j].is_last))
+		{
+			printf("%d ", map[i][j].val);
+			j++;
+		}
+		printf("%d\n", map[i][j].val);
+		i++;
+	}
+}
+
 int			main(int ac, char **av)
 {
-	t_env	e;
+	t_env		e;
 
-	if (!(e.mlx = mlx_init()))
-		die("Error initializing mlx\n");
-	e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
-	e.img = mlx_new_image(e.mlx, WIN_WIDTH, WIN_HEIGHT);
-	e.data = mlx_get_data_addr(e.img, &(e.bpp), &(e.size_line), &(e.endian));
-	mlx_key_hook(e.win, mlx_key, &e);
-	mlx_expose_hook(e.win, &mlx_expose, &e);
-	mlx_loop(e.mlx);
+	if (ac == 2)
+	{
+		e.map = read_map(av[1]);
+		if (!(e.mlx = mlx_init()))
+			die("Error initializing mlx\n", 0);
+		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
+		e.img = mlx_new_image(e.mlx, WIN_WIDTH, WIN_HEIGHT);
+		e.data = mlx_get_data_addr(e.img, &(e.bpp), &(e.size_line), &(e.endian));
+		mlx_key_hook(e.win, mlx_key, &e);
+		mlx_expose_hook(e.win, &mlx_expose, &e);
+		mlx_loop(e.mlx);
+	}
+	else
+		die("Usage:\n./wolf3d map\n", 0);
 	return (0);
 }

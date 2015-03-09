@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:51:39 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/07 22:38:00 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/09 23:44:35 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,6 @@
 # include <string.h>
 
 typedef	unsigned char	t_byte;
-
-typedef struct		s_env
-{
-	void			*mlx;
-	void			*win;
-	void			*img;
-	int				size_line;
-	int				bpp;
-	char			*data;
-	int				endian;
-}					t_env;
-
-typedef struct		s_point
-{
-	int				x;
-	int				y;
-	int				z;
-}					t_point;
-
-typedef struct		s_line
-{
-	int				delta_x;
-	int				delta_y;
-	float			error;
-	float			delta_error;
-}					t_line;
 
 typedef struct		s_list
 {
@@ -126,6 +100,4 @@ float				ft_abs(float n);
 int					ft_hsvtorgb(double hue, double saturation, double value);
 int					ft_negate(int color);
 int					ft_getcolor(int r, int g, int b);
-void				ft_putpix(t_env *e, int x, int y, int color);
-void				ft_drawline(t_point p1, t_point p2, t_env *e);
 #endif

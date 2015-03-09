@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 15:14:24 by wburgos           #+#    #+#             */
-/*   Updated: 2014/11/08 15:14:27 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/09 23:19:06 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	*ft_memalloc(size_t size)
 
 	ret = malloc(size);
 	if (ret)
-		ret = ft_memset(ret, 0, size);
+		ft_bzero(ret, size);
 	return (ret);
 }
