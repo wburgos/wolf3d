@@ -6,14 +6,14 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:54:01 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 05:30:50 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 06:47:48 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_H
 # define WOLF_H
 
-#include <stdio.h>
+# include <stdio.h>
 # include <mlx.h>
 # include "libft.h"
 
@@ -49,7 +49,7 @@ typedef struct			s_line
 	float	delta_error;
 }						t_line;
 
-typedef struct 			s_raycast
+typedef struct			s_raycast
 {
 	double	pos_x;
 	double	pos_y;
@@ -95,7 +95,6 @@ int						die(char *err, int perr);
 t_mapval				**read_map(char *file);
 t_mapval				*ft_nbrsplit(char *str);
 void					ft_putpix(t_env *e, int x, int y, int color);
-void					print_map(t_mapval **map); // Print de test, a virer
 void					render_wolf(t_env *e, t_raycast *rc);
 void					draw_wall(int x, t_raycast *rc, t_env *e);
 void					move(t_mapval **map, t_raycast *rc, int keycode);

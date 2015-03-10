@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/10 04:56:20 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 06:19:40 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 06:23:46 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	rotate_vector(double *dir_x, double *dir_y, double angle)
 	*dir_y = tmp * sin(angle) + *dir_y * cos(angle);
 }
 
-void	move(t_mapval **map, t_raycast *rc, int keycode)
+void		move(t_mapval **map, t_raycast *rc, int keycode)
 {
 	double	step;
 	double	angle;

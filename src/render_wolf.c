@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/10 00:20:48 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 05:30:10 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 06:47:08 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,18 @@ static void	launch_ray(t_raycast *rc, t_env *e)
 static void	get_dist(t_raycast *rc)
 {
 	if (rc->side == 0)
-		rc->perpwalldist = fabs((rc->map_x - rc->raypos_x + (1 - rc->step_x) / 2)
-			/ rc->raydir_x);
+	{
+		rc->perpwalldist = fabs((rc->map_x - rc->raypos_x
+			+ (1 - rc->step_x) / 2) / rc->raydir_x);
+	}
 	else
-		rc->perpwalldist = fabs((rc->map_y - rc->raypos_y + (1 - rc->step_y) / 2)
-			/ rc->raydir_y);
+	{
+		rc->perpwalldist = fabs((rc->map_y - rc->raypos_y
+			+ (1 - rc->step_y) / 2) / rc->raydir_y);
+	}
 }
 
-void	render_wolf(t_env *e, t_raycast *rc)
+void		render_wolf(t_env *e, t_raycast *rc)
 {
 	int			x;
 
@@ -98,5 +102,4 @@ void	render_wolf(t_env *e, t_raycast *rc)
 		draw_wall(x, rc, e);
 		x++;
 	}
-
 }

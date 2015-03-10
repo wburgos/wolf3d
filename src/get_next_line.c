@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 14:19:18 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/09 23:04:43 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 06:23:55 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*parse_file(int fd)
 	return (file);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char		*file = NULL;
 	static int		start = 0;
