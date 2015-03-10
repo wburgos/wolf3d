@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:29:50 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 00:14:17 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 00:19:45 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	mlx_expose(t_env *e)
 {
 	ft_bzero((void *)(e->data), (WIN_HEIGHT * e->size_line) +
 		(WIN_WIDTH + (e->bpp >> 3)));
-	// Insert drawing algo
+	render_wolf(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	return (0);
 }
@@ -39,7 +39,6 @@ int			main(int ac, char **av)
 	if (ac == 2)
 	{
 		e.map = read_map(av[1]);
-		// On a la map \o/
 		if (!(e.mlx = mlx_init()))
 			die("Error initializing mlx\n", 0);
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
