@@ -14,10 +14,10 @@ NAME = wolf3d
 SDIR = src/
 INC = includes/
 FILES = main.c ft_putpix.c die.c get_next_line.c read_map.c ft_nbrsplit.c \
-		ft_drawline.c print_map.c draw_wall.c render_wolf.c
+		print_map.c draw_wall.c render_wolf.c move.c
 OBJ = $(FILES:.c=.o)
 SRC = $(addprefix $(SDIR), $(FILES))
-FLAGS = -Wall -Wextra
+FLAGS = -Wall -Wextra -g3
 
 all: $(NAME)
 

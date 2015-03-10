@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/10 00:20:48 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 03:44:20 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 05:30:10 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ray_steps(t_raycast *rc)
 
 static void	ray_calculations(int x, t_raycast *rc)
 {
-	rc->camera_x = 2 * x / (2 * WIN_WIDTH) - 1;
+	rc->camera_x = 2 * x / (double)WIN_WIDTH - 1;
 	rc->raypos_x = rc->pos_x;
 	rc->raypos_y = rc->pos_y;
 	rc->raydir_x = rc->dir_x + rc->plane_x * rc->camera_x;
@@ -78,31 +78,24 @@ static void	launch_ray(t_raycast *rc, t_env *e)
 static void	get_dist(t_raycast *rc)
 {
 	if (rc->side == 0)
-		rc->perpwalldist = ft_abs((rc->map_x - rc->pos_x + (1 - rc->step_x) / 2)
+		rc->perpwalldist = fabs((rc->map_x - rc->raypos_x + (1 - rc->step_x) / 2)
 			/ rc->raydir_x);
 	else
-		rc->perpwalldist = ft_abs((rc->map_y - rc->pos_y + (1 - rc->step_y) / 2)
+		rc->perpwalldist = fabs((rc->map_y - rc->raypos_y + (1 - rc->step_y) / 2)
 			/ rc->raydir_y);
 }
 
-void	render_wolf(t_env *e)
+void	render_wolf(t_env *e, t_raycast *rc)
 {
-	t_raycast	rc;
 	int			x;
 
 	x = 0;
-	rc.pos_x = 22;
-	rc.pos_y = 12;
-	rc.dir_x = -1;
-	rc.dir_y = 0;
-	rc.plane_x = 0;
-	rc.plane_y = 0.66;
 	while (x < WIN_WIDTH)
 	{
-		ray_calculations(x, &rc);
-		launch_ray(&rc, e);
-		get_dist(&rc);
-		draw_wall(x, &rc, e);
+		ray_calculations(x, rc);
+		launch_ray(rc, e);
+		get_dist(rc);
+		draw_wall(x, rc, e);
 		x++;
 	}
 
