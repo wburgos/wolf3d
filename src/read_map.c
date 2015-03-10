@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/22 17:40:35 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/09 23:24:57 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 10:16:56 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,25 @@ t_mapval		**read_map(char *file)
 	int			gnl;
 	char		*line;
 	t_mapval	**map;
+	t_mapval	*splitted_line;
 
 	map = NULL;
 	if ((fd = open(file, O_RDONLY)) == -1)
-		die(NULL, 1);
+		die(file, 1);
 	gnl = get_next_line(fd, &line);
 	while (gnl != 0 && gnl != -1)
 	{
-		map = add_to_map(map, ft_nbrsplit(line));
+		splitted_line = ft_nbrsplit(line);
+		free(line);
+		if (!splitted_line)
+			break ;
+		map = add_to_map(map, splitted_line);
 		if (!map)
 			break ;
 		gnl = get_next_line(fd, &line);
 	}
-	if (gnl == -1 || !map)
-		die("Map parse error", 0);
+	if (gnl == -1 || !map || !splitted_line)
+		die("Map parse error\n", 0);
 	close(fd);
 	return (map);
 }

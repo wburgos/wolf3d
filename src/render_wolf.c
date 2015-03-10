@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/10 00:20:48 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 06:47:08 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 08:27:30 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,19 @@ static void	launch_ray(t_raycast *rc, t_env *e)
 		{
 			rc->sidedist_x += rc->deltadist_x;
 			rc->map_x += rc->step_x;
-			rc->side = 0;
+			if (rc->step_x < 0)
+				rc->side = 0;
+			else
+				rc->side = 1;
 		}
 		else
 		{
 			rc->sidedist_y += rc->deltadist_y;
 			rc->map_y += rc->step_y;
-			rc->side = 1;
+			if (rc->step_y < 0)
+				rc->side = 2;
+			else
+				rc->side = 3;
 		}
 		if (e->map[rc->map_x][rc->map_y].val > 0)
 			rc->hit = 1;
@@ -77,7 +83,7 @@ static void	launch_ray(t_raycast *rc, t_env *e)
 
 static void	get_dist(t_raycast *rc)
 {
-	if (rc->side == 0)
+	if (rc->side == 0 || rc->side == 1)
 	{
 		rc->perpwalldist = fabs((rc->map_x - rc->raypos_x
 			+ (1 - rc->step_x) / 2) / rc->raydir_x);

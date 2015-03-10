@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:54:01 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 06:47:48 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 11:25:35 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,63 +31,70 @@
 
 typedef struct			s_mapval
 {
-	int		val;
-	int		is_last;
+	int					val;
+	int					is_last;
 }						t_mapval;
 
 typedef struct			s_point
 {
-	int		x;
-	int		y;
+	int					x;
+	int					y;
 }						t_point;
 
 typedef struct			s_line
 {
-	int		delta_x;
-	int		delta_y;
-	float	error;
-	float	delta_error;
+	int					delta_x;
+	int					delta_y;
+	float				error;
+	float				delta_error;
 }						t_line;
 
 typedef struct			s_raycast
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	ttime;
-	double	old_ttime;
-	double	plane_x;
-	double	plane_y;
-	double	raydir_x;
-	double	raydir_y;
-	double	perpwalldist;
-	double	raypos_x;
-	double	raypos_y;
-	double	camera_x;
-	double	sidedist_x;
-	double	sidedist_y;
-	double	deltadist_x;
-	double	deltadist_y;
-	int		step_x;
-	int		step_y;
-	int		map_x;
-	int		map_y;
-	int		hit;
-	int		side;
+	double				pos_x;
+	double				pos_y;
+	double				dir_x;
+	double				dir_y;
+	double				ttime;
+	double				old_ttime;
+	double				plane_x;
+	double				plane_y;
+	double				raydir_x;
+	double				raydir_y;
+	double				perpwalldist;
+	double				raypos_x;
+	double				raypos_y;
+	double				camera_x;
+	double				sidedist_x;
+	double				sidedist_y;
+	double				deltadist_x;
+	double				deltadist_y;
+	int					step_x;
+	int					step_y;
+	int					map_x;
+	int					map_y;
+	int					hit;
+	int					side;
 }						t_raycast;
+
+typedef struct			s_verticalline
+{
+	int					y_start;
+	int					y_end;
+	int					color;
+}						t_verticalline;
 
 typedef struct			s_env
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	int			size_line;
-	int			bpp;
-	char		*data;
-	int			endian;
-	t_mapval	**map;
-	t_raycast	rc;
+	void				*mlx;
+	void				*win;
+	void				*img;
+	int					size_line;
+	int					bpp;
+	char				*data;
+	int					endian;
+	t_mapval			**map;
+	t_raycast			rc;
 }						t_env;
 
 int						get_next_line(int const fd, char **line);
@@ -98,5 +105,6 @@ void					ft_putpix(t_env *e, int x, int y, int color);
 void					render_wolf(t_env *e, t_raycast *rc);
 void					draw_wall(int x, t_raycast *rc, t_env *e);
 void					move(t_mapval **map, t_raycast *rc, int keycode);
+void					ft_rotate(double *dir_x, double *dir_y, double angle);
 
 #endif

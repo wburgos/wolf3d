@@ -6,12 +6,27 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:29:50 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 06:21:17 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/10 11:12:44 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "wolf.h"
+
+static void	free_map(t_mapval **map)
+{
+	int		i;
+
+	i = 0;
+	while (map && map[i])
+	{
+		free(map[i]);
+		map[i] = NULL;
+		i++;
+	}
+	free(map);
+	map = NULL;
+}
 
 static int	mlx_expose(t_env *e)
 {
@@ -25,7 +40,11 @@ static int	mlx_expose(t_env *e)
 static int	mlx_key(int keycode, t_env *e)
 {
 	if (keycode == ESC_CODE)
+	{
+		mlx_destroy_image(e->mlx, e->img);
+		free_map(e->map);
 		exit(0);
+	}
 	if (keycode == UP || keycode == RIGHT || keycode == LEFT || keycode == DOWN)
 	{
 		move(e->map, &(e->rc), keycode);
@@ -46,7 +65,7 @@ static void	init_rc(t_raycast *rc)
 
 int			main(int ac, char **av)
 {
-	t_env		e;
+	t_env	e;
 
 	if (ac == 2)
 	{
@@ -54,8 +73,10 @@ int			main(int ac, char **av)
 		if (!(e.mlx = mlx_init()))
 			die("Error initializing mlx\n", 0);
 		init_rc(&(e.rc));
-		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
-		e.img = mlx_new_image(e.mlx, WIN_WIDTH, WIN_HEIGHT);
+		if (!(e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME)))
+			die("Error initializing window\n", 0);
+		if (!(e.img = mlx_new_image(e.mlx, WIN_WIDTH, WIN_HEIGHT)))
+			die("Error initializing image\n", 0);
 		e.data = mlx_get_data_addr(e.img, &(e.bpp), &(e.size_line),
 			&(e.endian));
 		mlx_expose_hook(e.win, mlx_expose, &e);
