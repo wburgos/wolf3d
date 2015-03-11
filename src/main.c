@@ -39,17 +39,22 @@ static int	mlx_expose(t_env *e)
 
 static int	mlx_key(int keycode, t_env *e)
 {
+	char	map_name[20];
+
 	if (keycode == ESC_CODE)
 	{
 		mlx_destroy_image(e->mlx, e->img);
 		free_map(e->map);
 		exit(0);
 	}
-	if (keycode == UP || keycode == RIGHT || keycode == LEFT || keycode == DOWN)
-	{
+	if (keycode >= LEFT && keycode <= DOWN)
 		move(e->map, &(e->rc), keycode);
+	if (keycode >= CHNG_MAP1 && keycode <= CHNG_MAP9
+		&& (change_map(keycode, map_name)))
+		e->map = read_map(map_name);
+	if ((keycode >= LEFT && keycode <= DOWN)
+		|| (keycode >= CHNG_MAP1 && keycode <= CHNG_MAP9))
 		mlx_expose(e);
-	}
 	return (0);
 }
 
@@ -61,29 +66,25 @@ static void	init_rc(t_raycast *rc)
 	rc->dir_y = 0;
 	rc->plane_x = 0;
 	rc->plane_y = 0.66;
+	rc->crouch = 0;
 }
 
 int			main(int ac, char **av)
 {
 	t_env	e;
 
-	if (ac == 2)
-	{
-		e.map = read_map(av[1]);
-		if (!(e.mlx = mlx_init()))
-			die("Error initializing mlx\n", 0);
-		init_rc(&(e.rc));
-		if (!(e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME)))
-			die("Error initializing window\n", 0);
-		if (!(e.img = mlx_new_image(e.mlx, WIN_WIDTH, WIN_HEIGHT)))
-			die("Error initializing image\n", 0);
-		e.data = mlx_get_data_addr(e.img, &(e.bpp), &(e.size_line),
-			&(e.endian));
-		mlx_expose_hook(e.win, mlx_expose, &e);
-		mlx_hook(e.win, KEYPRESS, KEYPRESS_MASK, mlx_key, &e);
-		mlx_loop(e.mlx);
-	}
-	else
-		die("Usage:\n./wolf3d map\n", 0);
+	e.map = read_map("maps/1.map");
+	if (!(e.mlx = mlx_init()))
+		die("Error initializing mlx\n", 0);
+	init_rc(&(e.rc));
+	if (!(e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME)))
+		die("Error initializing window\n", 0);
+	if (!(e.img = mlx_new_image(e.mlx, WIN_WIDTH, WIN_HEIGHT)))
+		die("Error initializing image\n", 0);
+	e.data = mlx_get_data_addr(e.img, &(e.bpp), &(e.size_line),
+		&(e.endian));
+	mlx_expose_hook(e.win, mlx_expose, &e);
+	mlx_hook(e.win, KEYPRESS, KEYPRESS_MASK, mlx_key, &e);
+	mlx_loop(e.mlx);
 	return (0);
 }
