@@ -47,14 +47,12 @@ static int	mlx_key(int keycode, t_env *e)
 		free_map(e->map);
 		exit(0);
 	}
-	if (keycode >= LEFT && keycode <= DOWN)
-		move(e->map, &(e->rc), keycode);
-	if (keycode >= CHNG_MAP1 && keycode <= CHNG_MAP9
-		&& (change_map(keycode, map_name)))
-		e->map = read_map(map_name);
 	if ((keycode >= LEFT && keycode <= DOWN)
-		|| (keycode >= CHNG_MAP1 && keycode <= CHNG_MAP9))
+		|| keycode == W || keycode == A || keycode == S || keycode == D)
+	{
+		move(e->map, &(e->rc), keycode);
 		mlx_expose(e);
+	}
 	return (0);
 }
 

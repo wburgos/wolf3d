@@ -25,15 +25,12 @@
 # define UP				65362
 # define RIGHT			65363
 # define DOWN			65364
-# define CHNG_MAP1		49
-# define CHNG_MAP2		50
-# define CHNG_MAP3		51
-# define CHNG_MAP4		52
-# define CHNG_MAP5		53
-# define CHNG_MAP6		54
-# define CHNG_MAP7		55
-# define CHNG_MAP8		56
-# define CHNG_MAP9		57
+# define W				119
+# define A				97
+# define S				115
+# define D				100
+# define WALK			65505
+# define CROUCH			65507
 # define KEYPRESS_MASK	(1L<<0)
 # define KEYPRESS		2
 # define BUFF_SIZE		128
@@ -116,6 +113,5 @@ void					render_wolf(t_env *e, t_raycast *rc);
 void					draw_wall(int x, t_raycast *rc, t_env *e);
 void					move(t_mapval **map, t_raycast *rc, int keycode);
 void					ft_rotate(double *dir_x, double *dir_y, double angle);
-char					*change_map(int keycode, char *map_name);
 
 #endif

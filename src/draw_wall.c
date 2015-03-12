@@ -30,8 +30,8 @@ static void	draw_vertical_line(t_env *e, int x, t_verticalline line)
 	int		i;
 
 	i = 0;
-	while (i++ < line.y_start)
-		ft_putpix(e, x, i, 0x95D1FD);
+	while (i < line.y_start)
+		ft_putpix(e, x, i++, 0x95D1FD);
 	while (line.y_start < line.y_end)
 		ft_putpix(e, x, line.y_start++, line.color);
 	while (line.y_end < WIN_HEIGHT)
@@ -43,6 +43,8 @@ void		draw_wall(int x, t_raycast *rc, t_env *e)
 	int				line_height;
 	t_verticalline	line;
 
+	if (!rc->perpwalldist)
+		rc->perpwalldist = 1;
 	line_height = ft_abs((int)(WIN_HEIGHT / rc->perpwalldist));
 	if ((line.y_start = -line_height / 2 + WIN_HEIGHT / 2) < 0)
 		line.y_start = 0;
