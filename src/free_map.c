@@ -1,4 +1,7 @@
-static void	free_map(t_mapval **map)
+#include <stdlib.h>
+#include "wolf.h"
+
+void	free_map(t_mapval **map)
 {
 	int		i;
 

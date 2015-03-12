@@ -13,7 +13,6 @@
 #ifndef WOLF_H
 # define WOLF_H
 
-# include <stdio.h>
 # include <mlx.h>
 # include "libft.h"
 
@@ -116,5 +115,6 @@ void					render_wolf(t_env *e, t_raycast *rc);
 void					draw_wall(int x, t_raycast *rc, t_env *e);
 void					move(t_mapval **map, t_raycast *rc, int keycode);
 void					ft_rotate(double *dir_x, double *dir_y, double angle);
+void					free_map(t_mapval **map);
 
 #endif

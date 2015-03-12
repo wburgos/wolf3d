@@ -13,21 +13,6 @@
 #include <stdlib.h>
 #include "wolf.h"
 
-static void	free_map(t_mapval **map)
-{
-	int		i;
-
-	i = 0;
-	while (map && map[i])
-	{
-		free(map[i]);
-		map[i] = NULL;
-		i++;
-	}
-	free(map);
-	map = NULL;
-}
-
 static int	mlx_expose(t_env *e)
 {
 	ft_bzero((void *)(e->data), (WIN_HEIGHT * e->size_line) +
@@ -73,11 +58,25 @@ static int	mlx_relkey(int keycode, t_env *e)
 	return (0);
 }
 
+static void init_rc(t_raycast *rc)
+{
+	rc->pos_x = 3;
+	rc->pos_y = 18;
+	rc->dir_x = -1;
+	rc->dir_y = 0;
+	rc->plane_x = 0;
+	rc->plane_y = 0.66;
+	rc->crouch = 0;
+}
+
 int			main(int ac, char **av)
 {
 	t_env	e;
 
-	e.map = read_map("maps/1.map");
+	if (ac == 2)
+		e.map = read_map(av[1]);
+	else
+		e.map = read_map("map");
 	if (!(e.mlx = mlx_init()))
 		die("Error initializing mlx\n", 0);
 	if (!(e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME)))
@@ -86,13 +85,7 @@ int			main(int ac, char **av)
 		die("Error initializing image\n", 0);
 	e.data = mlx_get_data_addr(e.img, &(e.bpp), &(e.size_line),
 		&(e.endian));
-	e.rc.pos_x = 22;
-	e.rc.pos_y = 12;
-	e.rc.dir_x = -1;
-	e.rc.dir_y = 0;
-	e.rc.plane_x = 0;
-	e.rc.plane_y = 0.66;
-	e.rc.crouch = 0;
+	init_rc(&(e.rc));
 	mlx_expose_hook(e.win, mlx_expose, &e);
 	mlx_hook(e.win, KEYPRESS, KEYPRESS_MASK, mlx_key, &e);
 	mlx_hook(e.win, KEYREL, KEYREL_MASK, mlx_relkey, &e);
