@@ -32,7 +32,9 @@
 # define WALK			65505
 # define CROUCH			65507
 # define KEYPRESS_MASK	(1L<<0)
+# define KEYREL_MASK	(1L<<1)
 # define KEYPRESS		2
+# define KEYREL			3
 # define BUFF_SIZE		128
 
 typedef struct			s_mapval
@@ -81,6 +83,7 @@ typedef struct			s_raycast
 	int					map_y;
 	int					hit;
 	int					side;
+	int					slow;
 	int					crouch;
 }						t_raycast;
 

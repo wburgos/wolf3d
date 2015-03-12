@@ -69,7 +69,7 @@ void		move(t_mapval **map, t_raycast *rc, int keycode)
 	double	step;
 	double	angle;
 
-	step = 0.5;
+	step = (rc->slow) ? 0.1 : 0.5;
 	angle = 0.09;
 	if (keycode == UP || keycode == W)
 		move_forward(map, rc, step);

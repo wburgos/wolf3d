@@ -46,9 +46,15 @@ void		draw_wall(int x, t_raycast *rc, t_env *e)
 	if (!rc->perpwalldist)
 		rc->perpwalldist = 1;
 	line_height = ft_abs((int)(WIN_HEIGHT / rc->perpwalldist));
-	if ((line.y_start = -line_height / 2 + WIN_HEIGHT / 2) < 0)
+	line.y_start = -line_height / 2 + WIN_HEIGHT / 2;
+	if (rc->crouch)
+		line.y_start -= 60;
+	if (line.y_start < 0)
 		line.y_start = 0;
-	if ((line.y_end = line_height / 2 + WIN_HEIGHT / 2) >= WIN_HEIGHT)
+	line.y_end = line_height / 2 + WIN_HEIGHT / 2;
+	if (rc->crouch)
+		line.y_end -= 60;
+	if (line.y_end >= WIN_HEIGHT)
 		line.y_end = WIN_HEIGHT - 1;
 	line.color = mlx_get_color_value(e->mlx, color_from_side(rc->side));
 	draw_vertical_line(e, x, line);
