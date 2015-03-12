@@ -6,7 +6,7 @@
 /*   By: wburgos <wburgos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 17:29:50 by wburgos           #+#    #+#             */
-/*   Updated: 2015/03/10 11:12:44 by wburgos          ###   ########.fr       */
+/*   Updated: 2015/03/12 15:28:13 by wburgos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,13 @@ static int	mlx_relkey(int keycode, t_env *e)
 
 static void init_rc(t_raycast *rc)
 {
-	rc->pos_x = 3;
+	rc->pos_x = 43;
 	rc->pos_y = 18;
 	rc->dir_x = -1;
 	rc->dir_y = 0;
 	rc->plane_x = 0;
 	rc->plane_y = 0.66;
+	rc->slow = 0;
 	rc->crouch = 0;
 }
 
